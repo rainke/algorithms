@@ -1,0 +1,14 @@
+{
+  "name": "algorithms",
+  "author": {
+    "name": "rainke",
+    "url": "https://github.com/rainke"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node": "^8.0.2",
+    "typescript": "^3.2.4"
+  }
+}
