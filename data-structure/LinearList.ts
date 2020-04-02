@@ -1,0 +1,5 @@
+class LinearList {
+  
+}
+
+new NodeIterator()

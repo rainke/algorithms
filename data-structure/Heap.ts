@@ -1,6 +1,18 @@
 abstract class Heap {
     protected heapContainer: number[] = [];
 
+    constructor(items: number[] = []){
+        this.heapContainer = items;
+
+        for(let i = Math.floor(this.size / 2) - 1; i >= 0; i--) {
+            this.heapify(i)
+        }
+    }
+
+    get size() {
+        return this.heapContainer.length;
+    }
+
     private getParentIndex (childIndex: number) {
         return Math.floor((childIndex - 1) / 2);
     }
@@ -25,33 +37,35 @@ abstract class Heap {
 
     add(item: number) {
         this.heapContainer.push(item);
-        this.heapifyUp();
+        let i = this.size -1;
+
+        while(i) {
+            let parentIndex = this.getParentIndex(i);
+            if(!this.pairIsInCorrectOrder(parentIndex, i)) {
+                this.swap(i, parentIndex);
+                i = parentIndex;
+            }
+        }
         return this;
     }
-    /**
-     * 自下而上的序列化
-     */
-    private heapifyUp() {
-        let index = this.heapContainer.length - 1;
-        while(index) {
-            let parentIndex = this.getParentIndex(index);
-            if(this.pairIsInCorrectOrder(parentIndex, index)) {
-                return
-            } else {
-                this.swap(index, parentIndex);
-                index = parentIndex;
-            }
+
+    heapify(i: number) {
+        let left = this.getLeftChildIndex(i);
+        let right = this.getRightChildIndex(i);
+
+        if(left < this.size && !this.pairIsInCorrectOrder(i, left) || !this.pairIsInCorrectOrder(i, right)) {
+            const changIdx = this.pairIsInCorrectOrder(left, right) ? left: right;
+            this.swap(i, changIdx);
+            this.heapify(changIdx)
         }
     }
 
-    remove(item: number) {
+    remove(idx: number) {
 
     }
 
     graph() {
-        console.log('          1            ');
-        console.log('         2 3           ');
-        console.log('        4 5 6 7        ');
+        console.log(this.heapContainer);
     }
 
     abstract pairIsInCorrectOrder(parentIndex: number, childIndex: number): boolean
@@ -69,11 +83,7 @@ export class MaxHeap extends Heap {
     }
 }
 
-const mh = new MinHeap();
-const xh = new MaxHeap();
 
-mh.add(3).add(2).add(5).add(4).add(2)
-xh.add(3).add(2).add(5).add(4).add(2)
-// mh.graph();
-console.log(mh);
-console.log(xh);
+// const xh = new MaxHeap([16, 4, 10, 14, 7, 9, 3, 2, 8, 1]);
+const xh = new MaxHeap([7, 8 , 10, 2, 4, 1, 7]);
+xh.graph()

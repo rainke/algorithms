@@ -1,0 +1,14 @@
+{
+  "files.associations": {
+    "*.art": "html",
+    "*.wpy": "vue",
+    "*.js": "javascript",
+    "stdlib.h": "c"
+  },
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  }
+}
